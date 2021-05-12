@@ -1,0 +1,80 @@
+import './TweetBox.css';
+import React, {useState} from 'react'
+import {Avatar, Button} from '@material-ui/core';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import RepeatIcon from "@material-ui/icons/Repeat";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import PublishIcon from "@material-ui/icons/Publish";
+
+const TweetBox = () => {
+    const [input, setInput] = useState('');
+    const [tweets, setTweets] =useState([]);
+
+    const handleTweet = (event)=>{
+        event.preventDefault();
+        console.log(input);
+
+        let x= tweets.slice();
+
+        x.push({'title': 'Aman Singla', "message": input})
+
+        setTweets(x);
+
+        setInput('');
+    }
+
+    return (
+        <>
+        <div className='tweetBox'>
+            <form >
+                <div className="tweetBox-input">
+                    <Avatar src='https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png'/>
+
+                    <input type="text" placeholder='Whats happening?' value={input} onChange={(event)=> setInput(event.target.value)} />
+
+                    {/* <input type='text' placeholder='Enter Image URL'/> */}
+                    
+                </div>
+                <Button 
+                onClick = {handleTweet}className='tweetBox-tweetButton'>Tweet</Button>
+            </form>
+        </div>
+        <div className='renderPost'>
+        {
+        tweets.map((tweet, key)=>(
+            <div className='post' key={key}>
+                <div className="post-avatar">
+            <Avatar src='https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png'/>
+            </div>
+
+            <div className="post-body">
+                <div className="post-header">
+                    <div className="post-headerText">
+                        <h3>{tweet.title} 
+                            <span className='special-Name'>
+                            <VerifiedUserIcon className='post-badge'/> @aman_singla
+                            </span>
+                        </h3>
+                    </div>
+                    <div className="post-headerDescription">
+                        <p>{tweet.message}</p>
+                    </div>
+                </div>
+               
+                <div className="post-footer">
+                    <ChatBubbleOutlineIcon fontSize="small" />
+                    <RepeatIcon fontSize="small" />
+                    <FavoriteBorderIcon fontSize="small" />
+                    <PublishIcon fontSize="small" />
+          </div>
+        </div>
+    </div>
+    ))
+ }
+    </div>
+</>
+    )
+}
+
+export default TweetBox
