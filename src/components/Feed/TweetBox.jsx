@@ -14,11 +14,17 @@ const TweetBox = () => {
     const handleTweet = (event)=>{
         event.preventDefault();
         console.log(input);
+        
+        let date= new Date();
+        let hours = date.getHours() > 12 ? date.getHours() -12 : date.getHours();
+            let minutes = date.getMinutes()<10 ? '0'+ date.getMinutes : date.getMinutes();
+            let AM_PM = date.getHours() >= 12 ? 'PM' : 'AM';
+            let timestamp = hours + ' : '+ minutes + ' '+AM_PM;
 
         let x= tweets.slice();
 
-        x.push({'title': 'Aman Singla', "message": input})
-
+        x.push({'title': 'Aman Singla', "message": input, "time": timestamp})
+        x.reverse();
         setTweets(x);
 
         setInput('');
@@ -37,13 +43,13 @@ const TweetBox = () => {
                     
                 </div>
                 <Button 
-                onClick = {handleTweet}className='tweetBox-tweetButton'>Tweet</Button>
+                onClick = {handleTweet} className='tweetBox-tweetButton'>Tweet</Button>
             </form>
         </div>
         <div className='renderPost'>
         {
-        tweets.map((tweet, key)=>(
-            <div className='post' key={key}>
+        tweets.map((tweet)=>(
+            <div className='post' key={tweet.time}>
                 <div className="post-avatar">
             <Avatar src='https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png'/>
             </div>
@@ -53,7 +59,7 @@ const TweetBox = () => {
                     <div className="post-headerText">
                         <h3>{tweet.title} 
                             <span className='special-Name'>
-                            <VerifiedUserIcon className='post-badge'/> @aman_singla
+                            <VerifiedUserIcon className='post-badge'/> @aman_singla  {tweet.time}
                             </span>
                         </h3>
                     </div>

@@ -19,7 +19,7 @@ const Post = ({displayName, username, verified, text, image, avatar}) => {
                     <div className="post-headerText">
                         <h3>Aman Singla 
                             <span className='special-Name'>
-                            <VerifiedUserIcon className='post-badge'/> @aman_singla
+                            <VerifiedUserIcon className='post-badge'/> @aman_singla 8 : 10 PM
                             </span>
                         </h3>
                     </div>
