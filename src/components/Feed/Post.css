@@ -16,6 +16,10 @@
   margin-top: 30px;
 }
 
+.post-footer > .MuiSvgIcon:hover {
+  cursor: pointer;
+}
+
 .post-badge {
   font-size: 14px !important;
   color: var(--twitter-color);

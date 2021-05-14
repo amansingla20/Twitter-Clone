@@ -10,24 +10,26 @@ import PublishIcon from "@material-ui/icons/Publish";
 const TweetBox = () => {
     const [input, setInput] = useState('');
     const [tweets, setTweets] =useState([]);
-
+    const [secondInput, setSecondInput]= useState('');
     const handleTweet = (event)=>{
         event.preventDefault();
         console.log(input);
         
         let date= new Date();
         let hours = date.getHours() > 12 ? date.getHours() -12 : date.getHours();
-            let minutes = date.getMinutes()<10 ? '0'+ date.getMinutes : date.getMinutes();
+            let p= date.getMinutes();
+            let minutes = p <10 ? '0'+p: p;
             let AM_PM = date.getHours() >= 12 ? 'PM' : 'AM';
             let timestamp = hours + ' : '+ minutes + ' '+AM_PM;
 
-        let x= tweets.slice();
+        // let x= tweets.slice();
 
-        x.push({'title': 'Aman Singla', "message": input, "time": timestamp})
-        x.reverse();
-        setTweets(x);
+        // x.push({'title': 'Aman Singla', "message": input, "time": timestamp, "image": secondInput})
+        // x.reverse();
+        setTweets([{'title': 'Aman Singla', "message": input, "time": timestamp, "image": secondInput} , ...tweets]);
 
         setInput('');
+        setSecondInput('');
     }
 
     return (
@@ -38,10 +40,10 @@ const TweetBox = () => {
                     <Avatar src='https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png'/>
 
                     <input type="text" placeholder='Whats happening?' value={input} onChange={(event)=> setInput(event.target.value)} />
-
-                    {/* <input type='text' placeholder='Enter Image URL'/> */}
                     
                 </div>
+                <input type='text' placeholder='Enter Image URL' className='secondInput' value={secondInput} onChange={(event)=>setSecondInput(event.target.value)}/>
+
                 <Button 
                 onClick = {handleTweet} className='tweetBox-tweetButton'>Tweet</Button>
             </form>
@@ -67,7 +69,9 @@ const TweetBox = () => {
                         <p>{tweet.message}</p>
                     </div>
                 </div>
-               
+
+              {tweet.image && <img src={tweet.image} alt="" />}
+
                 <div className="post-footer">
                     <ChatBubbleOutlineIcon fontSize="small" />
                     <RepeatIcon fontSize="small" />

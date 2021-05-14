@@ -21,6 +21,13 @@
   border: none;
 }
 
+.secondInput {
+  border: 0;
+  outline: 0;
+  margin-left: 80px;
+  font-size: 16px;
+}
+
 .tweetBox-input > input:focus {
   outline: none;
 }
@@ -37,7 +44,6 @@
   width: 100px;
   align-items: center;
   margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 .post {
